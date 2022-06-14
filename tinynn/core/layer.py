@@ -299,7 +299,6 @@ class BatchNormalization(Layer):
         self.ctx = {'X_norm': X_norm, 'std': std, 'x_center': X_center}
         return self.params['gamma'] * X_norm + self.params['beta']
 
-
     def backward(self, grad):
         # grads w.r.t. params
         self.grads["gamma"] = (self.ctx["X_norm"] * grad).sum(self.reduce)
@@ -456,7 +455,7 @@ class GELU(Activation):
         self._cache = sigmoid(self._alpha * x)
         return x * self._cache
 
-    def derivative(self, x):
+    def derivative(self, x):  # change test
         return self._cache + x * self._alpha * self._cache * (1.0 - self._cache)
 
 
